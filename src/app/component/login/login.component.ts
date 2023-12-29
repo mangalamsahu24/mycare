@@ -10,21 +10,22 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
 
-  // login(): void {
-  //   // Implement your login logic here
-  //   console.log('Username:', this.username);
-  //   console.log('Password:', this.password);
-  // }
-   constructor(private http: HttpClient) {}
 
-  login(): void {
-    this.http.post<any>('http://localhost:3000/api/login', { username: this.username, password: this.password })
-      .subscribe(response => {
+  constructor(private http: HttpClient) {}
+  onSubmit() {
+    const loginData = {
+      username: this.username,
+      password: this.password,
+    };
+
+    this.http.post('http://localhost:3000/login', loginData)
+      .subscribe((response: any) => {
         if (response.success) {
           console.log('Login successful');
-          // You can navigate to another page or perform other actions upon successful login
+          // Navigate to another page on successful login if needed
         } else {
-          console.log('Login failed:', response.message);
+          console.log('Login failed: ', response.message);
+          // Handle failed login
         }
       });
   }
