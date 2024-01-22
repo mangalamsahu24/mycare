@@ -16,6 +16,7 @@ import { AppointmentComponent } from './component/appointment/appointment.compon
 import { RegisterComponent } from './component/register/register.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FileUploadComponent } from './component/file-upload/file-upload.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     AppointmentComponent,
     RegisterComponent,
-    ProfileComponent
+    ProfileComponent,
+    FileUploadComponent
   ],
   imports: [
     BrowserModule,

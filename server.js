@@ -1,8 +1,9 @@
 const express = require('express');
 const mysql = require('mysql');
+const multer = require('multer');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-
+const path = require('path');
 
 const app = express();
 const port = 3000;
@@ -26,8 +27,57 @@ db.connect((err) => {
   console.log('Connected to MySQL');
 });
 
+// Configure Multer for file upload
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, 'uploads/');
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + '-' + file.originalname);
+  },
+});
+
+const upload = multer({ storage: storage });
 // Middleware for parsing JSON in requests
 app.use(bodyParser.json());
+
+app.post('/upload', upload.single('file'), (req, res) => {
+  try {
+    const { originalname, filename } = req.file;
+
+    // Insert file details into the database
+    const query = 'INSERT INTO files (originalname, filename) VALUES (?, ?)';
+    db.query(query, [originalname, filename], (err, results) => {
+      if (err) {
+        console.error('Error executing MySQL query: ', err);
+        res.status(500).json({ error: 'Internal Server Error' });
+        return;
+      }
+
+      res.json({ success: true, message: 'File uploaded successfully' });
+    });
+  } catch (error) {
+    console.error('Error during file upload:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+
+
+// File list endpoint
+app.get('/files', (req, res) => {
+  // Retrieve list of files from the database
+  const query = 'SELECT * FROM files';
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error('Error executing MySQL query: ', err);
+      res.status(500).json({ error: 'Internal Server Error' });
+      return;
+    }
+
+    res.json(results);
+  });
+});
 
 // Define the login endpoint
 app.post('/login', async (req, res) => {
@@ -57,6 +107,8 @@ app.post('/login', async (req, res) => {
     }
   });
 });
+// Add this before other routes in your server.js
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 
 app.listen(port, () => {

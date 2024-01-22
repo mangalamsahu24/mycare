@@ -1,0 +1,18 @@
+<!-- file-upload.component.html -->
+<div>
+    <div>
+    <input type="file" (change)="onFileSelected($event)">
+    <button (click)="onUpload()">Upload</button>
+  </div>
+  
+  <div *ngIf="files.length > 0">
+    <h3>Uploaded Files:</h3>
+    <ul>
+      <li *ngFor="let file of files">
+        {{ file.originalname }} <a [href]="'http://localhost:3000/uploads/' + file.filename" target="_blank">View</a>
+        
+      </li>
+    </ul>
+  </div>
+</div>
+  
