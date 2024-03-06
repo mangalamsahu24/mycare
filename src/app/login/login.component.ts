@@ -21,11 +21,9 @@ export class LoginComponent {
     this.http.post('http://localhost:3000/login', loginData)
       .subscribe((response: any) => {
         if (response.success) {
-          console.log('Login successful');
-          // Navigate to another page on successful login if needed
+          console.log('Login successful hello',response.message);
         } else {
           console.log('Login failed: ', response.message);
-          // Handle failed login
         }
       });
   }

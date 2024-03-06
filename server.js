@@ -80,12 +80,45 @@ app.get('/files', (req, res) => {
 });
 
 // Define the login endpoint
-app.post('/login', async (req, res) => {
-  const { username, password, otp } = req.body;
+// app.post('/login', async (req, res) => {
+//   const { username, password, otp } = req.body;
 
-  // Check username and password in the database
+//   // Check username and password in the database
+//   const query = 'SELECT * FROM login WHERE username = ? AND password = ?';
+//   db.query(query, [username, password], async (err, results) => {
+//     if (err) {
+//       console.error('Error executing MySQL query: ', err);
+//       res.status(500).json({ error: 'Internal Server Error' });
+//       return;
+//     }
+
+    // if (results.length > 0) {
+    //   // User is authenticated, now verify OTP
+    //   const secret = 'your_secret_key'; // Replace with a secure secret key
+    //   const isOTPValid = await verifyOTP(secret, otp);
+
+    //   if (isOTPValid) {
+    //     res.json({ success: true, message: 'Login successful' });
+    //   } else {
+    //     res.json({ success: false, message: 'Invalid OTP' });
+    //   }
+    // } 
+//     else {
+//       res.json({ success: false, message: 'Invalid username or password' });
+//     }
+//   });
+// });
+// Add this before other routes in your server.js
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+
+// Login endpoint
+app.post('/login', (req, res) => {
+  const { username, password } = req.body;
+
+  // Perform a MySQL query to check username and password
   const query = 'SELECT * FROM login WHERE username = ? AND password = ?';
-  db.query(query, [username, password], async (err, results) => {
+  db.query(query, [username, password], (err, results) => {
     if (err) {
       console.error('Error executing MySQL query: ', err);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -93,24 +126,15 @@ app.post('/login', async (req, res) => {
     }
 
     if (results.length > 0) {
-      // User is authenticated, now verify OTP
-      const secret = 'your_secret_key'; // Replace with a secure secret key
-      const isOTPValid = await verifyOTP(secret, otp);
-
-      if (isOTPValid) {
-        res.json({ success: true, message: 'Login successful' });
-      } else {
-        res.json({ success: false, message: 'Invalid OTP' });
-      }
+      // Successful login
+      res.json({ success: true, message: 'Login successful well done' });
     } else {
+      // Invalid credentials
       res.json({ success: false, message: 'Invalid username or password' });
     }
   });
 });
-// Add this before other routes in your server.js
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
-
-
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+// 
