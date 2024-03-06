@@ -8,14 +8,14 @@ import { Router } from '@angular/router'; // Import the Router
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  username: string = '';
+  name: string = '';
   password: string = '';
 
   constructor(private http: HttpClient, private router: Router) {}
 
   onSubmit() {
     const loginData = {
-      username: this.username,
+      name: this.name,
       password: this.password,
     };
 

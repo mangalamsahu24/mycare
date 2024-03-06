@@ -15,9 +15,9 @@ const routes: Routes = [
   {path: 'profile', component:ProfileComponent},
   {path: 'admin', component:AdminComponent},
   {path: 'login', component:LoginComponent},
-  {path: 'login', children: [
-    {path: 'register', component:LoginComponent}
-  ]},
+  // {path: 'login', children: [
+  //   {path: 'register', component:LoginComponent}
+  // ]},
   {path: 'register', component:RegisterComponent},
   {path: 'register', children: [
     {path: 'login', component:LoginComponent}

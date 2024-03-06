@@ -4,6 +4,7 @@ const multer = require('multer');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const path = require('path');
+const bcrypt = require('bcrypt');
 
 const app = express();
 const port = 3000;
@@ -114,11 +115,11 @@ app.get('/files', (req, res) => {
 
 // Login endpoint
 app.post('/login', (req, res) => {
-  const { username, password } = req.body;
+  const { name, password } = req.body;
 
   // Perform a MySQL query to check username and password
-  const query = 'SELECT * FROM login WHERE username = ? AND password = ?';
-  db.query(query, [username, password], (err, results) => {
+  const query = 'SELECT * FROM login WHERE name = ? AND password = ?';
+  db.query(query, [name, password], (err, results) => {
     if (err) {
       console.error('Error executing MySQL query: ', err);
       res.status(500).json({ error: 'Internal Server Error' });
@@ -134,6 +135,43 @@ app.post('/login', (req, res) => {
     }
   });
 });
+
+//Register user
+app.post('/register', async (req, res) => {
+  const { name, email, password } = req.body;
+
+  // Check if the email already exists
+  const checkQuery = 'SELECT * FROM login WHERE email = ?';
+  db.query(checkQuery, [email], async (err, results) => {
+    if (err) {
+      console.error('Error checking existing user:', err);
+      return res.status(500).json({ success: false, message: 'Registration failed' });
+    }
+
+    if (results.length > 0) {
+      // Email already exists, alert the user or handle accordingly
+      return res.status(400).json({ success: false, message: 'Email already registered' });
+    }
+
+    try {
+      // Email does not exist, proceed with registration
+      const hashedPassword = await bcrypt.hash(password, 10); // 10 is the salt rounds
+      const insertQuery = 'INSERT INTO login (name, email, password) VALUES (?, ?, ?)';
+      db.query(insertQuery, [name, email, hashedPassword], (err, results) => {
+        if (err) {
+          console.error('Error registering user:', err);
+          return res.status(500).json({ success: false, message: 'Registration failed' });
+        }
+
+        res.json({ success: true, message: 'Registration successful' });
+      });
+    } catch (error) {
+      console.error('Error hashing password:', error);
+      return res.status(500).json({ success: false, message: 'Registration failed' });
+    }
+  });
+});
+
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

@@ -1,39 +1,39 @@
-<app-header></app-header>
+
 <div class="container h-100">
   <div class="background">
     <div class="shape"></div>
     <div class="shape"></div>
   </div>
-  <form>
+  <form (ngSubmit)="onSubmit()" class="form">
     <h3>Register Here</h3>
     <div class="form-outline mb-3">
       <label class="form-label" for="form3Example1cg">Your Name</label>
-      <input type="text" placeholder="Name"id="form3Example1cg" class="form-control form-control-lg" />
+      <input type="text" placeholder="Name"id="form3Example1cg" class="form-control form-control-lg"  [(ngModel)]="name" [ngModelOptions]="{standalone: true}" required>
     </div>
 
     <div class="form-outline mb-3">
       <label class="form-label" for="form3Example3cg">Your Email</label>
-      <input type="email" placeholder="Email"id="form3Example3cg" class="form-control form-control-lg" />
+      <input type="email" placeholder="Email"id="form3Example3cg" class="form-control form-control-lg"  [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required>
     </div>
 
     <div class="form-outline mb-3">
       <label class="form-label" for="form3Example4cg">Password</label>
-      <input type="password" placeholder="Password" id="form3Example4cg" class="form-control form-control-lg" />
+      <input type="password" placeholder="Password" id="form3Example4cg" class="form-control form-control-lg"  [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required>
     </div>
 
     <div class="form-outline mb-3">
       <label class="form-label" for="form3Example4cdg">Repeat your password</label>
-      <input type="password" placeholder="Re-peat password"id="form3Example4cdg" class="form-control form-control-lg" />
+      <input type="password" placeholder="Re-peat password"id="form3Example4cdg" class="form-control form-control-lg"  [(ngModel)]="confirmPassword" [ngModelOptions]="{standalone: true}"required>
     </div>
 
-    <!-- <div class="">
-      <input class="form-check-input" type="checkbox" />
-      <label class="form-check-label">I agree all statements in <a href="#!" class="text-body"><u>Terms of service</u></a>
-      </label>
-    </div> -->
+    <label class="cont">
+      <input type="checkbox">
+      <div class="checkmark"></div>
+      I agree all statements in <a href="" class="text-body"><u>Terms of service</u></a>  
+    </label>
 
     <div class="d-flex justify-content-center">
-      <button type="button"class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" style="width: 300px;">Register</button>
+      <button type="submit" class="btn btn-success btn-block btn-lg gradient-custom-4 text-body" style="width: 300px;">Register</button>
     </div>
 
     <p class="text-center text-muted mt-5 mb-0">Have already an account? 
