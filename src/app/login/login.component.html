@@ -1,0 +1,31 @@
+<app-header></app-header>
+<div class="container h-100">
+  <div class="background">
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+  <form (ngSubmit)="onSubmit()" class="form">
+<h3 class="text-3xl font-bold underline">Login Here</h3>
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Email or Phone" [(ngModel)]="username" required>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder="Password" class="form-control" [(ngModel)]="password" required>
+    </div>
+    <!-- <div class="form-group">
+      <label for="otp">OTP:</label>
+      <input type="text" id="otp" name="otp" [(ngModel)]="otp" required>
+    </div> -->
+
+    <button type="submit" class="btn btn-primary">Login</button>
+    <p class="text-center text-muted mt-5 mb-0"> Don't Have an account? 
+      <button routerLink="register" >Register here</button></p>
+    <!-- <div class="social">
+        <div class="go"><i class="fab fa-google"></i>  Google</div>
+        <div class="fb"><i class="fab fa-facebook"></i>  Facebook</div>
+    </div> -->
+  </form>
+</div>

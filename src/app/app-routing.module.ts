@@ -1,24 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
-import { LoginComponent } from './component/login/login.component';
-import { AppointmentComponent } from './component/appointment/appointment.component';
-import { RegisterComponent } from './component/register/register.component';
-import { ProfileComponent } from './component/profile/profile.component';
-import { FileUploadComponent } from './component/file-upload/file-upload.component';
+import { LoginComponent } from './login/login.component';
+import { AppointmentComponent } from './appointment/appointment.component';
+import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 const routes: Routes = [
-  {path: 'home"', component:HomeComponent},
-  {path: 'about', component:FileUploadComponent},
+  {path: '', component:HomeComponent},
   {path: 'appointment', component:AppointmentComponent},
-  {path: 'department', component:HomeComponent},
-  {path: 'doctor', component:HomeComponent},
   {path: 'profile', component:ProfileComponent},
-  {path: 'contact', component:HomeComponent},
+  {path: 'admin', component:AdminComponent},
   {path: 'login', component:LoginComponent},
+  {path: 'login', children: [
+    {path: 'register', component:LoginComponent}
+  ]},
   {path: 'register', component:RegisterComponent},
-  { path: 'uploads/**', redirectTo: '', pathMatch: 'full' },
+  {path: 'register', children: [
+    {path: 'login', component:LoginComponent}
+  ]},
+
+  // {path: '', redirectTo: '/home', pathMatch: 'full' },
+  {path: 'uploads/**', redirectTo: '', pathMatch: 'full' },
 
 ];
 

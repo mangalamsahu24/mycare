@@ -9,14 +9,15 @@ import { HomeComponent } from './home/home.component';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
-import { HeaderComponent } from './component/header/header.component';
-import { FooterComponent } from './component/footer/footer.component';
-import { LoginComponent } from './component/login/login.component';
-import { AppointmentComponent } from './component/appointment/appointment.component';
-import { RegisterComponent } from './component/register/register.component';
-import { ProfileComponent } from './component/profile/profile.component';
+import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './footer/footer.component';
+import { LoginComponent } from './login/login.component';
+import { AppointmentComponent } from './appointment/appointment.component';
+import { RegisterComponent } from './register/register.component';
+import { ProfileComponent } from './profile/profile.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FileUploadComponent } from './component/file-upload/file-upload.component';
+import { FileUploadComponent } from './file-upload/file-upload.component';
+import { AdminComponent } from './admin/admin.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { FileUploadComponent } from './component/file-upload/file-upload.compone
     AppointmentComponent,
     RegisterComponent,
     ProfileComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,

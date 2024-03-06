@@ -9,16 +9,16 @@ body{
     background-color: #0e0550;
 }
 .background{
-    width: 730px;
-    height: 720px;
+    width: 700px;
+    height: 1000px;
     position: absolute;
     transform: translate(-50%,-50%);
     left: 50%;
-    top: 50%;
+    top: 70%;
 }
 .background .shape{
-    height: 200px;
-    width: 200px;
+    height: 300px;
+    width: 300px;
     position: absolute;
     border-radius: 50%;
 }
@@ -28,7 +28,7 @@ body{
         #23a2f6
     );
     left: -80px;
-    top: -80px;
+    top: 60px;
 }
 .shape:last-child{
     background: linear-gradient(
@@ -36,16 +36,16 @@ body{
         #2fff36,
         #f09819
     );
-    right: -30px;
-    bottom: -80px;
+    right: -80px;
+    bottom: 80px;
 }
 form{
-    height: 820px;
+    height: 800px;
     width: 500px;
     background-color: rgba(255,255,255,0.13);
     position: absolute;
     transform: translate(-50%,-50%);
-    top: 50%;
+    top: 67%;
     left: 50%;
     border-radius: 10px;
     backdrop-filter: blur(10px);
@@ -70,14 +70,14 @@ form h3{
 label{
     display: block;
     margin-top: 30px;
-    font-size: 16px;
-    font-weight: 500;
+    font-size: 20px;
+    font-weight: 600;
 }
 input{
     display: block;
     height: 50px;
     width: 100%;
-    background-color: rgba(40, 180, 99, 0.07);
+    background-color: rgba(71, 128, 214, 0.44);
     border-radius: 3px;
     padding: 0 10px;
     margin-top: 8px;
@@ -87,7 +87,7 @@ input{
 ::placeholder{
     color: #22490b;
 }
-button{
+/* button{
     margin-top: 50px;
     width: 100%;
     background-color: #f8f8f8;
@@ -97,10 +97,7 @@ button{
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
-}
-button:hover{
- background-color: #28B463;
-}
+} */
 .social{
   margin-top: 30px;
   display: flex;
@@ -143,3 +140,30 @@ button:hover{
     /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     background: linear-gradient(to right, rgba(132, 250, 176, 1), rgba(143, 211, 244, 1))
     }
+
+button {
+    font-size: 18px;
+    display: inline-block;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    will-change: box-shadow,transform;
+    background: radial-gradient( 100% 100% at 100% 0%, #89E5FF 0%, #5468FF 100% );
+    box-shadow: 0px 0.01em 0.01em rgb(45 35 66 / 40%), 0px 0.3em 0.7em -0.01em rgb(45 35 66 / 30%), inset 0px -0.01em 0px rgb(58 65 111 / 50%);
+    padding: 0 2em;
+    border-radius: 0.3em;
+    color: #fff;
+    height: 2.6em;
+    text-shadow: 0 1px 0 rgb(0 0 0 / 40%);
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+button:hover {
+    box-shadow: 0px 0.1em 0.2em rgb(45 35 66 / 40%), 0px 0.4em 0.7em -0.1em rgb(45 35 66 / 30%), inset 0px -0.1em 0px #3c4fe0;
+    transform: translateY(-0.1em);
+}
+
+button:active {
+    box-shadow: inset 0px 0.1em 0.6em #3c4fe0;
+    transform: translateY(0em);
+}
